@@ -87,30 +87,10 @@ func writeKeyring(path string, entity *openpgp.Entity) error {
 	}
 	defer f.Close()
 
-	// serializedEntity := bytes.NewBuffer(nil)
-
-	// err = entity.SerializePrivate(f, nil)
-	// if err != nil {
-	// 	return err
-	// }
-
-	err = entity.PrivateKey.Serialize(f)
+	err = entity.SerializePrivate(f, nil)
 	if err != nil {
 		return err
 	}
-
-	// headers := map[string]string{"Version": "GnuPG v1"}
-
-	// w, err := armor.Encode(f, openpgp.PrivateKeyType, headers)
-	// if err != nil {
-	// 	return err
-	// }
-	// defer w.Close()
-
-	// _, err = f.Write(serializedEntity.Bytes())
-	// if err != nil {
-	// 	return err
-	// }
 
 	return nil
 }
